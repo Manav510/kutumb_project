@@ -1,0 +1,113 @@
+/* Navbar */
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background-color: #1d4ed8; /* Blue */
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Navbar Container */
+  .navbar-container {
+    max-width: 96rem; /* Equivalent to max-w-6xl */
+    margin: 0 auto;
+    padding: 0 1rem; /* Padding */
+  }
+  
+  /* Navbar Header */
+  .navbar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+  }
+  
+  /* Username */
+  .navbar-username {
+    font-weight: bold;
+    margin-right: 1rem;
+  }
+  
+  /* Mobile Menu Button */
+  .mobile-menu-button {
+    display: block;
+  }
+  
+  .menu-icon {
+    height: 24px;
+    width: 24px;
+  }
+  
+  .desktop-nav {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+  
+  /* Navigation Links */
+  .nav-link {
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+  }
+  
+  .nav-link:hover {
+    background-color: #2563eb; /* hover:bg-blue-500 */
+  }
+  
+  .nav-link.active {
+    background-color: #1e40af; /* bg-blue-700 */
+    font-weight: bold;
+  }
+  
+  /* Logout Button */
+  .logout-button {
+    background-color: #ef4444; /* bg-red-500 */
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+  }
+  
+  .logout-button:hover {
+    background-color: #dc2626; /* hover:bg-red-600 */
+  }
+  
+  /* Mobile Navigation Menu */
+  .mobile-nav {
+    display: block;
+  }
+  
+  .mobile-nav-links {
+    padding: 0.5rem;
+  }
+  
+  .mobile-nav-link {
+    display: block;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+  }
+  
+  .mobile-nav-link:hover {
+    background-color: #2563eb; /* hover:bg-blue-500 */
+  }
+  
+  .mobile-nav-link.active {
+    background-color: #1e40af; /* bg-blue-700 */
+    font-weight: bold;
+  }
+  
+  .mobile-logout-button {
+    width: 100%;
+    text-align: left;
+    background-color: #ef4444; /* bg-red-500 */
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+  }
+  
+  .mobile-logout-button:hover {
+    background-color: #dc2626; /* hover:bg-red-600 */
+  }
+  
