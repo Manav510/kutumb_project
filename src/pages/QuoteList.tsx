@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getQuotes } from "../services/api";
 import { Quote } from "../types/quote";
@@ -100,7 +100,7 @@ const styles = {
     minWidth: "100vw",
     background: "linear-gradient(to bottom, #e0f2fe, #ffffff)",
     padding: "1rem",
-    boxSizing: "border-box",
+    boxSizing: "border-box" as const,
   },
   cardContainer: {
     maxWidth: "1200px",
@@ -111,13 +111,13 @@ const styles = {
     boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
   },
   title: {
-    textAlign: "center",
+    textAlign: "center" as const,
     marginBottom: "1rem",
     fontSize: "1.5rem",
     color: "#1e3a8a",
   },
   noQuotesText: {
-    textAlign: "center",
+    textAlign: "center" as const,
     color: "#888",
     marginTop: "1rem",
   },
@@ -134,15 +134,15 @@ const styles = {
     transition: "transform 0.3s ease-in-out",
   },
   imageContainer: {
-    position: "relative",
+    position: "relative" as const,
   },
   image: {
     width: "100%",
     height: "200px",
-    objectFit: "cover",
+    objectFit: "cover" as const,
   },
   quoteText: {
-    position: "absolute",
+    position: "absolute" as const,
     top: "0",
     left: "0",
     right: "0",
@@ -150,7 +150,7 @@ const styles = {
     color: "white",
     padding: "0.5rem",
     fontWeight: "bold",
-    textAlign: "center",
+    textAlign: "center" as const,
   },
   quoteInfo: {
     padding: "0.75rem",
@@ -160,7 +160,7 @@ const styles = {
     color: "#555",
   },
   loadMoreContainer: {
-    textAlign: "center",
+    textAlign: "center" as const,
     marginTop: "1.5rem",
   },
   loadMoreButton: (loading: boolean) => ({
@@ -172,7 +172,7 @@ const styles = {
     cursor: loading ? "not-allowed" : "pointer",
   }),
   createQuoteButton: {
-    position: "fixed",
+    position: "fixed" as const,
     bottom: "1.5rem",
     right: "1.5rem",
     backgroundColor: "#28a745",

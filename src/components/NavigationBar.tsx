@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { clearStorage, getUsername } from '../utils/storage';
 
@@ -23,23 +23,21 @@ export const Navbar: React.FC = () => {
       setIsMobileView(window.innerWidth <= 720);
     };
 
-    handleResize(); // Initial check
-    window.addEventListener('resize', handleResize); // Add event listener for window resize
+    handleResize(); 
+    window.addEventListener('resize', handleResize); 
 
     return () => {
-      window.removeEventListener('resize', handleResize); // Cleanup event listener on component unmount
+      window.removeEventListener('resize', handleResize); 
     };
   }, []);
 
   return (
     <nav style={styles.navbar}>
       <div style={styles.navbarContainer}>
-        {/* Username */}
         <div style={styles.usernameContainer}>
           <span style={styles.usernameText}>Welcome, {username}</span>
         </div>
 
-        {/* Navigation Links (Centered) */}
         {!isMobileView && (
           <div style={styles.navLinksContainer}>
             {navItems.map((item) => (
@@ -57,7 +55,6 @@ export const Navbar: React.FC = () => {
           </div>
         )}
 
-        {/* Mobile Menu Button */}
         <div style={isMobileView ? { ...styles.mobileMenuButton, display: 'block' } : { display: 'none' }}>
           <button onClick={() => setIsMenuOpen(!isMenuOpen)} style={styles.menuButton}>
             {isMenuOpen ? (
@@ -94,7 +91,6 @@ export const Navbar: React.FC = () => {
           </button>
         </div>
 
-        {/* Desktop Logout Button */}
         {!isMobileView && (
           <button onClick={handleLogout} style={styles.logoutButton}>
             Logout
@@ -102,7 +98,6 @@ export const Navbar: React.FC = () => {
         )}
       </div>
 
-      {/* Mobile Navigation Drawer */}
       {isMenuOpen && isMobileView && (
         <div style={styles.mobileNav}>
           {navItems.map((item) => (
@@ -113,15 +108,15 @@ export const Navbar: React.FC = () => {
                 ...styles.mobileNavLink,
                 ...(location.pathname === item.path ? styles.activeNavLink : {}),
               }}
-              onClick={() => setIsMenuOpen(false)} // Close the mobile menu on link click
+              onClick={() => setIsMenuOpen(false)} 
             >
               {item.label}
             </Link>
           ))}
           <button
             onClick={() => {
-              handleLogout(); // Handle logout
-              setIsMenuOpen(false); // Close the mobile menu after logout
+              handleLogout(); 
+              setIsMenuOpen(false); 
             }}
             style={styles.mobileLogoutButton}
           >
@@ -133,7 +128,7 @@ export const Navbar: React.FC = () => {
   );
 };
 
-const styles = {
+const styles: { [key: string]: React.CSSProperties } = {
   navbar: {
     backgroundColor: '#a3afff',
     padding: '1rem 2rem',
@@ -169,11 +164,11 @@ const styles = {
     transition: 'color 0.3s ease',
   },
   activeNavLink: {
-    color: '#f0f8ff', // Light Sky Blue
+    color: '#f0f8ff', 
     borderBottom: '2px solid #fff',
   },
   mobileMenuButton: {
-    display: 'none', // Default state for larger screens
+    display: 'none', 
   },
   menuButton: {
     background: 'none',
@@ -186,7 +181,7 @@ const styles = {
     color: '#fff',
   },
   logoutButton: {
-    backgroundColor: '#4682B4', // Deeper Sky Blue
+    backgroundColor: '#4682B4', 
     color: '#fff',
     padding: '10px 20px',
     borderRadius: '5px',
@@ -196,17 +191,17 @@ const styles = {
   },
   mobileNav: {
     backgroundColor: '#a3afff',
-    position: 'fixed', // Fixed positioning to overlay the content
+    position: 'fixed', 
     top: '0',
     left: '0',
-    width: '250px', // Set width of the drawer
-    height: '100%', // Make it full height
+    width: '250px', 
+    height: '100%',
     zIndex: 1000,
     display: 'flex',
     flexDirection: 'column',
     padding: '10px',
-    transform: 'translateX(0)', // Slide in when menu is open
-    transition: 'transform 0.3s ease-in-out', // Smooth sliding animation
+    transform: 'translateX(0)', 
+    transition: 'transform 0.3s ease-in-out', 
   },
   mobileNavLink: {
     textDecoration: 'none',
@@ -214,7 +209,7 @@ const styles = {
     fontSize: '1rem',
     textAlign: 'center',
     padding: '10px',
-    backgroundColor: '#a3afff', // Deeper Sky Blue
+    backgroundColor: '#a3afff', 
     borderRadius: '5px',
     margin: '5px 0',
     transition: 'background 0.3s ease',

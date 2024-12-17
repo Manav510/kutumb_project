@@ -49,7 +49,6 @@ export const Login: React.FC = () => {
           overflow: 'hidden',
         }}
       >
-        {/* Left Side Illustration */}
         <div
           style={{
             flex: 1,
@@ -73,7 +72,6 @@ export const Login: React.FC = () => {
           </div>
         </div>
 
-        {/* Right Side Login Form */}
         <div
           style={{
             flex: 1,
@@ -120,7 +118,6 @@ export const Login: React.FC = () => {
               required
             />
 
-            {/* OTP Input */}
             <div
               style={{
                 display: 'flex',
@@ -146,7 +143,6 @@ export const Login: React.FC = () => {
               />
             </div>
 
-            {/* Login Button */}
             <button
               type="submit"
               style={{
@@ -174,7 +170,6 @@ export const Login: React.FC = () => {
         </div>
       </div>
 
-      {/* Media Queries */}
       <style>
         {`
           @media (max-width: 768px) {

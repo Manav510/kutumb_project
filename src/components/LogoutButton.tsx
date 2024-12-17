@@ -10,10 +10,8 @@ export const LogoutButton: React.FC<LogoutButtonProps> = ({ className }) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    // Clear local storage
     clearStorage();
     
-    // Redirect to login page
     navigate('/');
   };
 

@@ -30,14 +30,11 @@ export const createQuote = async (text: string, mediaUrl: string) => {
 };
 
 export const getQuotes = async (limit: number = 20, offset: number = 0) => {
-    console.log(getToken());
     
   const response = await axios.get(`${BASE_URL}/getQuotes`, {
     params: { limit, offset },
     headers: { 'Authorization': getToken() }
   });
-  console.log(response.data.data);
   
-  // Ensure we return an array, even if the response is not an array
   return Array.isArray(response.data.data) ? response.data.data : [];
 };

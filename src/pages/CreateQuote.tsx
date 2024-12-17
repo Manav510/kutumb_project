@@ -1,4 +1,4 @@
-import React, { useState, FormEvent } from 'react';
+import { useState, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { uploadMedia, createQuote } from '../services/api';
 
@@ -22,7 +22,7 @@ const styles = {
     alignItems: 'center',
     background: 'linear-gradient(to bottom, #e0f2fe, #ffffff)',
     padding: '1rem',
-    boxSizing: 'border-box',
+    boxSizing: 'border-box' as const,
   },
   formContainer: {
     width: '100%',
@@ -31,12 +31,12 @@ const styles = {
     borderRadius: '1rem',
     boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
     padding: '1.5rem',
-    boxSizing: 'border-box',
-    position: 'relative',
+    boxSizing: 'border-box' as const,
+    position: 'relative'as const,
     top: '-20px',
   },
   heading: {
-    textAlign: 'center',
+    textAlign: 'center' as const,
     marginBottom: '1rem',
     fontSize: '1.3rem',
     fontWeight: '600',
@@ -49,7 +49,7 @@ const styles = {
     padding: '0.5rem',
     marginBottom: '1rem',
     borderRadius: '0.5rem',
-    textAlign: 'center',
+    textAlign: 'center' as const,
     fontSize: '0.9rem',
   },
   inputText: {
@@ -60,7 +60,7 @@ const styles = {
     border: '1px solid #d1d5db',
     fontSize: '0.9rem',
     outline: 'none',
-    resize: 'none',
+    resize: 'none' as const,
   },
   fileInput: {
     display: 'block',
@@ -74,7 +74,7 @@ const styles = {
   imagePreview: {
     width: '100%',
     height: '150px',
-    objectFit: 'cover',
+    objectFit: 'cover' as const,
     borderRadius: '0.5rem',
     marginTop: '0.5rem',
   },
@@ -87,7 +87,7 @@ const styles = {
     fontSize: '0.9rem',
     cursor: 'pointer',
     border: 'none',
-    textAlign: 'center',
+    textAlign: 'center' as const,
     transition: 'background-color 0.3s ease',
   },
   submitButtonHover: {
@@ -102,7 +102,6 @@ const styles = {
 
 export const CreateQuote: React.FC = () => {
   const [text, setText] = useState('');
-  const [file, setFile] = useState<File | null>(null);
   const [mediaUrl, setMediaUrl] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -141,11 +140,11 @@ export const CreateQuote: React.FC = () => {
 
         if (uploadedMediaUrl) {
           setMediaUrl(uploadedMediaUrl);
-          setFile(selectedFile);
         } else {
           setError('Failed to get media URL');
         }
       } catch (error) {
+        console.error(error)
         setError('File upload failed');
       }
     };
@@ -163,7 +162,8 @@ export const CreateQuote: React.FC = () => {
       await createQuote(text, mediaUrl);
       navigate('/quotes');
     } catch (error) {
-      setError('Quote creation failed');
+        console.error(error)
+      setError(`Quote creation failed`);
     }
   };
 
