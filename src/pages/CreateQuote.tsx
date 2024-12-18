@@ -25,7 +25,7 @@ const styles = {
     boxSizing: 'border-box' as const,
   },
   formContainer: {
-    width: '100%',
+    width: '90%',
     maxWidth: '300px',
     backgroundColor: '#ffffff',
     borderRadius: '1rem',
@@ -53,7 +53,7 @@ const styles = {
     fontSize: '0.9rem',
   },
   inputText: {
-    width: '100%',
+    width: '95%',
     height: '100px',
     padding: '0.5rem',
     borderRadius: '0.5rem',
