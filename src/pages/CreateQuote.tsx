@@ -26,7 +26,7 @@ const styles = {
   },
   formContainer: {
     width: '100%',
-    maxWidth: '500px',
+    maxWidth: '450px',
     backgroundColor: '#ffffff',
     borderRadius: '1rem',
     boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
