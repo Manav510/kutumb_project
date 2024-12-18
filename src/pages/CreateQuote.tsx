@@ -21,12 +21,12 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     background: 'linear-gradient(to bottom, #e0f2fe, #ffffff)',
-    padding: '1rem',
+    padding: '0.25rem',
     boxSizing: 'border-box' as const,
   },
   formContainer: {
     width: '100%',
-    maxWidth: '450px',
+    maxWidth: '300px',
     backgroundColor: '#ffffff',
     borderRadius: '1rem',
     boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
@@ -70,6 +70,7 @@ const styles = {
     border: '1px solid #ccc',
     outline: 'none',
     fontSize: '0.9rem',
+    width: '80%',
   },
   imagePreview: {
     width: '100%',
