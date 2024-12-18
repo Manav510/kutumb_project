@@ -98,8 +98,8 @@ const styles = {
   outerContainer: {
     display: "flex",
     flexDirection: "row" as const,
-    maxWidth: "480px",
-    width: "100%",
+    maxWidth: "780px",
+    width: "85%",
     backgroundColor: "#ffffff",
     borderRadius: "1rem",
     boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
@@ -156,14 +156,16 @@ const styles = {
     outline: "none",
     transition: "border-color 0.3s",
     boxSizing: "border-box" as const,
+    width: "90%",
   },
   otpContainer: {
     display: "flex",
     justifyContent: "center",
     gap: "0.5rem",
+    width: "90%",
   },
   otpInput: {
-    width: "3rem",
+    width: "2rem",
     height: "3rem",
     fontSize: "1.2rem",
     borderRadius: "0.5rem",
@@ -176,6 +178,7 @@ const styles = {
   },
   loginButton: {
     backgroundColor: "#1e40af",
+    width: "90%",
     color: "#ffffff",
     padding: "0.75rem",
     borderRadius: "0.5rem",
