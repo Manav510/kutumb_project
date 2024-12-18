@@ -98,7 +98,7 @@ const styles = {
   outerContainer: {
     display: "flex",
     flexDirection: "row" as const,
-    maxWidth: "900px",
+    maxWidth: "480px",
     width: "100%",
     backgroundColor: "#ffffff",
     borderRadius: "1rem",
@@ -117,13 +117,14 @@ const styles = {
     backgroundColor: "#e0e7ff",
     justifyContent: "center",
     alignItems: "center",
-    padding: "2rem",
+    padding: "1.5rem",
+    display : "flex"
   },
   welcomeText: {
     textAlign: "center" as const,
     color: "#1e3a8a",
     fontWeight: "bold",
-    fontSize: "1.25rem",
+    fontSize: "1rem",
   },
   welcomeTitle: {
     marginBottom: "1rem",
@@ -133,7 +134,7 @@ const styles = {
   },
   formContainer: {
     flex: 1,
-    padding: "2rem",
+    padding: "1.5rem",
   },
   formTitle: {
     fontSize: "1.5rem",
@@ -159,12 +160,12 @@ const styles = {
   otpContainer: {
     display: "flex",
     justifyContent: "center",
-    gap: "0.75rem",
+    gap: "0.5rem",
   },
   otpInput: {
     width: "3rem",
     height: "3rem",
-    fontSize: "1.5rem",
+    fontSize: "1.2rem",
     borderRadius: "0.5rem",
     border: "1px solid #d1d5db",
     textAlign: "center" as const,
