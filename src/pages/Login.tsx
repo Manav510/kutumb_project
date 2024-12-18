@@ -16,7 +16,7 @@ export const Login: React.FC = () => {
       const response = await login(username, otp);
       setToken(response.data.token);
       setUsername(username);
-      navigate('/create-quote');
+      navigate('/quotes');
     } catch (error) {
       alert(`Login failed ${error}`);
     }
@@ -98,7 +98,6 @@ export const Login: React.FC = () => {
               gap: '1.5rem',
             }}
           >
-            {/* Username Input */}
             <input
               type="text"
               placeholder="Username"
