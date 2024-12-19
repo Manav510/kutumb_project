@@ -1,18 +1,52 @@
-import  { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback, memo } from "react";
 import { useNavigate } from "react-router-dom";
 import { getQuotes } from "../services/api";
 import { Quote } from "../types/quote";
+
+const QuoteCard = memo(({ quote, refProp }: { quote: Quote; refProp?: (node: HTMLDivElement | null) => void }) => (
+  <div
+    ref={refProp}
+    style={styles.quoteCard}
+    onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.05)"}
+    onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}
+  >
+    <div style={styles.imageContainer}>
+      <img 
+        src={quote.mediaUrl} 
+        alt="Quote" 
+        style={styles.image} 
+        loading="lazy" 
+      />
+      <div style={styles.quoteText}>{quote.text}</div>
+    </div>
+    <div style={styles.quoteInfo}>
+      <span>{quote.username}</span>
+      <span>{new Date(quote.created_at).toLocaleString()}</span>
+    </div>
+  </div>
+));
+
+QuoteCard.displayName = "QuoteCard";
 
 export const QuoteList: React.FC = () => {
   const [quotes, setQuotes] = useState<Quote[]>([]);
   const [offset, setOffset] = useState(0);
   const [hasMore, setHasMore] = useState(true);
   const [loading, setLoading] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
   const navigate = useNavigate();
+  const observerRef = useRef<IntersectionObserver>();
+  const loadingRef = useRef<HTMLDivElement>(null);
+
+  const handleScroll = useCallback(() => {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    setShowScrollTop(scrollTop > 500);
+  }, []);
 
   useEffect(() => {
-    fetchQuotes();
-  }, [offset]);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [handleScroll]);
 
   const fetchQuotes = async () => {
     if (!hasMore || loading) return;
@@ -25,6 +59,7 @@ export const QuoteList: React.FC = () => {
         setHasMore(false);
       } else {
         setQuotes((prev) => [...prev, ...fetchedQuotes]);
+        setOffset((prev) => prev + 20);
       }
     } catch (error) {
       console.error("Failed to fetch quotes", error);
@@ -34,8 +69,45 @@ export const QuoteList: React.FC = () => {
     }
   };
 
-  const loadMore = () => {
-    setOffset((prev) => prev + 20);
+  const lastElementRef = useCallback(
+    (node: HTMLDivElement | null) => {
+      if (loading) return;
+
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+      }
+
+      observerRef.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && hasMore) {
+          fetchQuotes();
+        }
+      }, {
+        root: null,
+        rootMargin: "300px",
+        threshold: 0.1
+      });
+
+      if (node) {
+        observerRef.current.observe(node);
+      }
+    },
+    [loading, hasMore]
+  );
+
+  useEffect(() => {
+    fetchQuotes();
+    return () => {
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+      }
+    };
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   };
 
   const handleCreateQuoteClick = () => {
@@ -53,33 +125,17 @@ export const QuoteList: React.FC = () => {
 
         <div style={styles.quoteGrid}>
           {quotes.map((quote, index) => (
-            <div
-              key={index}
-              style={styles.quoteCard}
-              onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.05)"}
-              onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}
-            >
-              <div style={styles.imageContainer}>
-                <img src={quote.mediaUrl} alt="Quote" style={styles.image} />
-                <div style={styles.quoteText}>{quote.text}</div>
-              </div>
-              <div style={styles.quoteInfo}>
-                <span>{quote.username}</span>
-                <span>{new Date(quote.created_at).toLocaleString()}</span>
-              </div>
-            </div>
+            <QuoteCard
+              key={quote.id || index}
+              quote={quote}
+              refProp={index === quotes.length - 1 ? lastElementRef : undefined}
+            />
           ))}
         </div>
 
-        {hasMore && (
-          <div style={styles.loadMoreContainer}>
-            <button
-              onClick={loadMore}
-              disabled={loading}
-              style={styles.loadMoreButton(loading)}
-            >
-              {loading ? "Loading..." : "Load More"}
-            </button>
+        {loading && (
+          <div style={styles.loadingContainer} ref={loadingRef}>
+            Loading more quotes...
           </div>
         )}
       </div>
@@ -90,6 +146,16 @@ export const QuoteList: React.FC = () => {
       >
         +
       </button>
+
+      {showScrollTop && (
+        <button
+          onClick={scrollToTop}
+          style={styles.toTopButton}
+          aria-label="Scroll to top"
+        >
+          ↑
+        </button>
+      )}
     </div>
   );
 };
@@ -188,4 +254,27 @@ const styles = {
     border: "none",
     cursor: "pointer",
   },
+  loadingContainer: {
+    textAlign: "center" as const,
+    padding: "1rem",
+    color: "#666",
+  },
+  toTopButton: {
+    position: "fixed" as const,
+    bottom: "1.5rem",
+    left: "1.5rem",
+    backgroundColor: "#1e40af",
+    color: "white",
+    width: "50px",
+    height: "50px",
+    borderRadius: "50%",
+    boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontSize: "1.5rem",
+    border: "none",
+    cursor: "pointer",
+    zIndex: 50,
+  }
 };
